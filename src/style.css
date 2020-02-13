@@ -1,0 +1,122 @@
+body {
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-family: 'Maledpan';
+  color: #222;
+  background-color: #444;
+  font-size: 24px;
+  line-height: 1.5;
+}
+
+.el-button {
+  font-family: 'Maledpan';
+}
+
+.purple {
+  color: #d81bd8;
+}
+
+.blue {
+  color: #0000ff;
+}
+
+.green {
+  color: #67C23A;
+}
+
+.orange {
+  color: #ff9900;
+}
+
+.red {
+  color: #ff0000;
+}
+
+.black {
+  color: #000;
+}
+
+#app {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 600px;
+  background: #fff;
+}
+
+.header {
+  text-align: center;
+  background: #ccc;
+  height: 40px;
+}
+
+#cash-box {
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+#cash-box .cash {
+  font-size: 3em;
+  margin-top: -10px;
+}
+
+#cash-box .text {
+  color: #aaa;
+}
+
+.grid-content.num {
+  text-align: right;
+}
+
+#stock {
+  margin-top: 20px;
+}
+
+.el-dialog {
+  max-width: 700px;
+}
+
+.el-dialog .grid-content {
+  font-size: 20px;
+}
+
+.el-dialog .el-row {
+  border-bottom: 1px solid #eee;
+}
+
+footer {
+  padding: 20px;
+}
+
+footer .el-col {
+  margin-top: 10px;
+}
+
+.small {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.box-total {
+  display: flex;
+}
+
+.box-total .grid-content {
+  padding: 10px;
+  flex: 1;
+  display: inline-block;
+}
+
+.box-total .grid-content.total {
+  font-weight: 800;
+}
