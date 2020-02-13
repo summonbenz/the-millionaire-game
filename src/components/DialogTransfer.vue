@@ -33,6 +33,7 @@ export default {
     handleClose() {
         this.$emit('clicked', false)
     }
+    //https://asia-east2-the-millionaire-41e7b.cloudfunctions.net/transferBank?teamId=-M-zvF-MNSjQcldmYf5J&cash=2000
   }
 }
 </script>
