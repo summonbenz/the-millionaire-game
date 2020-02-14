@@ -1,7 +1,7 @@
 <template>
     <el-dialog
       class="dialog"
-      title="คำนวณยอด"
+      title="คำนวณยอดเดือนปัจจุปัน"
       width="100%"
       :visible.sync="dialogVisible"
       :before-close="handleClose">
@@ -15,78 +15,78 @@
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นเหล็ก
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">1</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_iron}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              12,000
+              {{bank.iron}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">90,000</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_iron * bank.iron}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นการประปา
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">1</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_water}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              1,100
+              {{bank.water}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">90,000</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_water * bank.water}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นสาธารณะสุข
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">1</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_health}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              12,000
+              {{bank.health}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">90,000</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_health * bank.health}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นไฟฟ้า
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">1</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_electric}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              12,000
+              {{bank.electric}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">90,000</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_electric * bank.electric}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นน้ำมัน
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">1</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_oil}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              12,000
+              {{bank.oil}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">90,000</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_oil * bank.oil}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นวิจัยและเทคโนโลยี
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">1</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_technology}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              12,000
+              {{bank.technology}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">90,000</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_technology * bank.technology}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">เงินสด
           </div></el-col>
-        <el-col :offset="11" :span="6"><div class="grid-content text-right">90,000</div></el-col>
+        <el-col :offset="11" :span="6"><div class="grid-content text-right">{{info.cash}}</div></el-col>
       </el-row>
       
       <div class="box-total">
           <div class="grid-content text-right">รวมทั้งหมด</div>
-          <div class="grid-content total text-left">3,000</div>
+          <div class="grid-content total text-left">{{ total() }}</div>
       </div>
 
       <span slot="footer" class="dialog-footer">
@@ -97,7 +97,7 @@
 
 <script>
 export default {
-    props: ['dialogVisible'],
+    props: ['dialogVisible', 'bank', 'info'],
   data() {
     return {
       num: 0,
@@ -109,7 +109,10 @@ export default {
     },
     handleClose() {
         this.$emit('clicked', false)
-    }
+    },
+    total() {
+      return this.info.cash + this.info.stock_iron*this.bank.iron + this.info.stock_water*this.bank.water + this.info.stock_health*this.bank.health + this.info.stock_electric*this.bank.electric + this.info.stock_oil*this.bank.oil + this.info.stock_technology*this.bank.technology
+    },
   }
 }
 </script>

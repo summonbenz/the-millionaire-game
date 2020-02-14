@@ -60,13 +60,14 @@
           <el-button @click="dialogTotal = true" size="big" type="default" icon="el-icon-s-data" style="width: 100%">คำนวณยอด</el-button>
         </el-col>
       </el-row>
+      <div class="text-center" style="margin-top:10px;font-size:0.8em;color:#bbb;">เดือนที่ {{ bank.month }}</div>
     </footer>
 
     <!-- dialog -->
-    <DialogBuy :dialogVisible="dialogBuy" @clicked="handleDialogBuy" />
-    <DialogSold :dialogVisible="dialogSold" @clicked="handleDialogSold" />
+    <DialogBuy :dialogVisible="dialogBuy" :bank="bank" @clicked="handleDialogBuy" />
+    <DialogSold :dialogVisible="dialogSold" :bank="bank" @clicked="handleDialogSold" />
     <DialogTransfer :dialogVisible="dialogTransfer" @clicked="handleDialogTransfer" />
-    <DialogTotal :dialogVisible="dialogTotal" @clicked="handleDialogTotal" />
+    <DialogTotal :dialogVisible="dialogTotal" :bank="bank" :info="info" @clicked="handleDialogTotal" />
   </div>
 </template>
 
@@ -95,6 +96,15 @@ export default {
         db: firebase.database(),
         delay: 300,
         options: {},
+        bank: {
+          month: 0,
+          electric: 0,
+          health: 0,
+          iron: 0,
+          oil: 0,
+          technology: 0,
+          water: 0
+        },
         info: {
             teamName: null,
             cash: 0,
@@ -110,11 +120,17 @@ export default {
   created () {
 
     const teamId = localStorage.getItem('teamId')
+    
+    const self = this
       
     var getInfoRef = this.db.ref('scoreboard/'+teamId)
-    const self = this
     getInfoRef.on('value', function(snapshot) {
         self.info = snapshot.val()
+    });
+
+    var getBankRef = this.db.ref('game/info')
+    getBankRef.on('value', function(snapshot) {
+        self.bank = snapshot.val()
     });
   },
   methods: {
