@@ -1,17 +1,20 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin')
+const cors = require('cors');
+const express = require('express');
+const app = express();
 
 var serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://the-millionaire-41e7b.firebaseio.com"
-  });
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// http://localhost:5001/the-millionaire-41e7b/asia-east2/transferBank?teamId=-M-zvF-MNSjQcldmYf5J&cash=2000
-exports.transferBank = functions.region('asia-east2').https.onRequest(async (req, res) => {
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://the-millionaire-41e7b.firebaseio.com"
+});
+
+// Automatically allow cross-origin requests
+app.use(cors({ origin: true }));
+
+app.get('/', async (req, res) => {
     const teamId = req.query.teamId
     const cash = req.query.cash
     // Push the new message into the Realtime Database using the Firebase Admin SDK.
@@ -28,6 +31,8 @@ exports.transferBank = functions.region('asia-east2').https.onRequest(async (req
         'timestamp': new Date().getTime()
     });
 
+    res.send({'status': true});
+});
 
-    res.send('ok');
-  });
+// Expose Express API as a single Cloud Function:
+exports.transferBank = functions.region('asia-east2').https.onRequest(app);
