@@ -15,8 +15,10 @@
     "element-ui": "^2.4.5",
     "express": "^4.17.1",
     "firebase": "^7.8.1",
+    "numeral": "^2.0.6",
     "vue": "^2.6.11",
     "vue-countup-v2": "^4.0.0",
+    "vue-filter-number-format": "^2.0.0",
     "vue-router": "^3.1.5"
   },
   "devDependencies": {

@@ -1,4 +1,7 @@
 
+html{
+  background-color: #444;
+}
 body {
 	-webkit-backface-visibility: hidden;
 	-webkit-font-smoothing: antialiased;
@@ -6,7 +9,6 @@ body {
   text-rendering: optimizeLegibility;
   font-family: 'Maledpan';
 	color: #222;
-	background-color: #444;
 	font-size: 24px;
 	line-height: 1.5;
 }
@@ -19,12 +21,7 @@ body {
 .orange{ color: #ff9900; }
 .red{ color: #ff0000; }
 .black{ color: #000; }
-#app{
-  margin: 0 auto;
-  padding: 0;
-  max-width: 600px;
-  background:#fff;
-}
+
 .header{
   text-align: center;
   background: #ccc;

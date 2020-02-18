@@ -1,9 +1,9 @@
 <template>
-    <div style="padding: 20px;">
-        <h1>เข้าสู่ระบบ</h1>
+    <div id="login" style="padding: 20px;">
+        <h1>ตั้งชื่อทีม</h1>
         <el-input placeholder="โปรดตั้งชื่อทีม" v-model.trim="login.teamname"></el-input>
         <el-row style="text-align: center;">
-            <el-button @click="onSubmit" type="primary">เข้าสู่ระบบ</el-button>
+            <el-button @click="onSubmit" type="primary">ตกลง</el-button>
         </el-row>
     </div>
 </template>
@@ -59,3 +59,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+#login{
+   margin: 0 auto;
+   padding: 0;
+   max-width: 600px;
+   background:#fff;
+}
+</style>

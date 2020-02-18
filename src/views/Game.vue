@@ -10,34 +10,33 @@
                 :delay="delay"
                 :endVal="info.cash"
                 :options="options"
-                @ready="onReady"
                 />
             </div>
         </div>
         <div id="stock">
           <el-row class="purple">
             <el-col :span="12"><div class="grid-content bg-purple">หุ้นเหล็ก</div></el-col>
-            <el-col :span="12"><div class="grid-content num">{{ info.stock_iron }}</div></el-col>
+            <el-col :span="12"><div class="grid-content num">{{ info.stock_iron | numFormat }}</div></el-col>
           </el-row>
           <el-row class="blue">
             <el-col :span="12"><div class="grid-content bg-purple">หุ้นการประปา</div></el-col>
-            <el-col :span="12"><div class="grid-content num">{{ info.stock_water }}</div></el-col>
+            <el-col :span="12"><div class="grid-content num">{{ info.stock_water | numFormat }}</div></el-col>
           </el-row>
           <el-row class="green">
             <el-col :span="12"><div class="grid-content bg-purple">หุ้นสาธารณสุข</div></el-col>
-            <el-col :span="12"><div class="grid-content num">{{ info.stock_health }}</div></el-col>
+            <el-col :span="12"><div class="grid-content num">{{ info.stock_health | numFormat }}</div></el-col>
           </el-row>
           <el-row class="orange">
             <el-col :span="12"><div class="grid-content bg-purple">หุ้นไฟฟ้า</div></el-col>
-            <el-col :span="12"><div class="grid-content num">{{ info.stock_electric }}</div></el-col>
+            <el-col :span="12"><div class="grid-content num">{{ info.stock_electric | numFormat }}</div></el-col>
           </el-row>
           <el-row class="red">
             <el-col :span="12"><div class="grid-content bg-purple">หุ้นน้ำมัน</div></el-col>
-            <el-col :span="12"><div class="grid-content num">{{ info.stock_oil }}</div></el-col>
+            <el-col :span="12"><div class="grid-content num">{{ info.stock_oil | numFormat }}</div></el-col>
           </el-row>
           <el-row class="black">
             <el-col :span="12"><div class="grid-content bg-purple">หุ้นวิจัยและเทคโนโลยี</div></el-col>
-            <el-col :span="12"><div class="grid-content num">{{ info.stock_technology }}</div></el-col>
+            <el-col :span="12"><div class="grid-content num">{{ info.stock_technology | numFormat }}</div></el-col>
           </el-row>
         </div>
         
@@ -60,12 +59,13 @@
           <el-button @click="dialogTotal = true" size="big" type="default" icon="el-icon-s-data" style="width: 100%">คำนวณยอด</el-button>
         </el-col>
       </el-row>
-      <div class="text-center" style="margin-top:10px;font-size:0.8em;color:#bbb;">เดือนที่ {{ bank.month }}</div>
+      <div class="text-center" style="margin-top:10px;font-size:0.8em;color:#bbb;">({{teamId}})</div>
+      
     </footer>
 
     <!-- dialog -->
-    <DialogBuy :dialogVisible="dialogBuy" :bank="bank" @clicked="handleDialogBuy" />
-    <DialogSold :dialogVisible="dialogSold" :bank="bank" @clicked="handleDialogSold" />
+    <DialogBuy :dialogVisible="dialogBuy" :bank="bank" :cash="info.cash" @clicked="handleDialogBuy" />
+    <DialogSold :dialogVisible="dialogSold" :info="info" :bank="bank" @clicked="handleDialogSold" />
     <DialogTransfer :dialogVisible="dialogTransfer" @clicked="handleDialogTransfer" />
     <DialogTotal :dialogVisible="dialogTotal" :bank="bank" :info="info" @clicked="handleDialogTotal" />
   </div>
@@ -89,6 +89,7 @@ export default {
   data() {
     return {
         teamname: this.$route.params.teamname,
+        teamId: null,
         dialogBuy: false,
         dialogSold: false,
         dialogTransfer: false,
@@ -119,11 +120,11 @@ export default {
   },
   created () {
 
-    const teamId = localStorage.getItem('teamId')
+    this.teamId = localStorage.getItem('teamId')
     
     const self = this
       
-    var getInfoRef = this.db.ref('scoreboard/'+teamId)
+    var getInfoRef = this.db.ref('scoreboard/'+this.teamId)
     getInfoRef.on('value', function(snapshot) {
         self.info = snapshot.val()
     });
@@ -141,3 +142,14 @@ export default {
   }
 }
 </script>
+<style scoped>
+body{
+    background-color: #444;
+}
+#app{
+   margin: 0 auto;
+   padding: 0;
+   max-width: 600px;
+   background:#fff;
+}
+</style>

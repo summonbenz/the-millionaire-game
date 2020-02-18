@@ -1,7 +1,7 @@
 <template>
     <el-dialog
       class="dialog"
-      title="คำนวณยอดเดือนปัจจุปัน"
+      title="มูลค่าเงินทั้งหมด"
       width="100%"
       :visible.sync="dialogVisible"
       :before-close="handleClose">
@@ -15,78 +15,78 @@
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นเหล็ก
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">{{info.stock_iron}}</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_iron | numFormat}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              {{bank.iron}}
+              {{bank.iron | numFormat}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">{{info.stock_iron * bank.iron}}</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_iron * bank.iron | numFormat}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นการประปา
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">{{info.stock_water}}</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_water | numFormat}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              {{bank.water}}
+              {{bank.water | numFormat}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">{{info.stock_water * bank.water}}</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_water * bank.water | numFormat}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นสาธารณะสุข
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">{{info.stock_health}}</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_health | numFormat}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              {{bank.health}}
+              {{bank.health | numFormat}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">{{info.stock_health * bank.health}}</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_health * bank.health | numFormat}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นไฟฟ้า
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">{{info.stock_electric}}</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_electric | numFormat}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              {{bank.electric}}
+              {{bank.electric | numFormat}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">{{info.stock_electric * bank.electric}}</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_electric * bank.electric | numFormat}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นน้ำมัน
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">{{info.stock_oil}}</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_oil | numFormat}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              {{bank.oil}}
+              {{bank.oil | numFormat}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">{{info.stock_oil * bank.oil}}</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_oil * bank.oil | numFormat}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">หุ้นวิจัยและเทคโนโลยี
           </div></el-col>
-        <el-col :span="3"><div class="grid-content text-center">{{info.stock_technology}}</div></el-col>
+        <el-col :span="3"><div class="grid-content text-center">{{info.stock_technology | numFormat}}</div></el-col>
         <el-col :span="8">
           <div class="grid-content text-center">
-              {{bank.technology}}
+              {{bank.technology | numFormat}}
           </div>
            </el-col>
-        <el-col :span="6"><div class="grid-content text-right">{{info.stock_technology * bank.technology}}</div></el-col>
+        <el-col :span="6"><div class="grid-content text-right">{{info.stock_technology * bank.technology | numFormat}}</div></el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="7"><div class="grid-content">เงินสด
           </div></el-col>
-        <el-col :offset="11" :span="6"><div class="grid-content text-right">{{info.cash}}</div></el-col>
+        <el-col :offset="11" :span="6"><div class="grid-content text-right">{{info.cash | numFormat}}</div></el-col>
       </el-row>
       
       <div class="box-total">
           <div class="grid-content text-right">รวมทั้งหมด</div>
-          <div class="grid-content total text-left">{{ total() }}</div>
+          <div class="grid-content total text-left" style="color: green;">{{ total() | numFormat }}</div>
       </div>
 
       <span slot="footer" class="dialog-footer">
